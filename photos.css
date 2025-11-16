@@ -1,0 +1,498 @@
+/* Photo Gallery Page Specific Styles */
+
+/* Back Button */
+.back-button-container {
+    text-align: center;
+    margin: 30px 0;
+    animation: fadeIn 0.8s ease-out;
+}
+
+.back-button {
+    display: inline-block;
+    padding: 12px 30px;
+    background: var(--vintage-cream);
+    border: 2px solid var(--vintage-brown);
+    border-radius: 50px;
+    color: var(--vintage-dark);
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 3px 10px var(--shadow-color);
+    position: relative;
+    overflow: hidden;
+}
+
+.back-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(201, 169, 97, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.back-button:hover::before {
+    left: 100%;
+}
+
+.back-button:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px var(--shadow-color);
+    background: var(--vintage-light);
+    border-color: var(--vintage-gold);
+}
+
+.back-button span {
+    margin-right: 8px;
+    font-size: 1.2rem;
+}
+
+/* Gallery Info Section */
+.gallery-info-section {
+    animation: fadeIn 1s ease-out 0.3s both;
+}
+
+.gallery-intro {
+    text-align: center;
+    font-size: 1.2rem;
+    line-height: 2;
+    color: var(--text-dark);
+    font-style: italic;
+}
+
+/* Photo Gallery Grid */
+.photo-gallery-section {
+    animation: fadeIn 1s ease-out 0.5s both;
+    margin: 40px 0;
+}
+
+.photo-gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 20px 0;
+}
+
+/* Photo Item Styles */
+.photo-item {
+    position: relative;
+    overflow: hidden;
+    border: 3px solid var(--vintage-brown);
+    border-radius: 12px;
+    background: var(--vintage-light);
+    aspect-ratio: 1;
+    box-shadow: 
+        0 8px 20px var(--shadow-color),
+        inset 0 1px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    cursor: pointer;
+    animation: fadeInScale 0.6s ease-out both;
+}
+
+.photo-item::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(135deg, 
+        rgba(201, 169, 97, 0.1) 0%, 
+        transparent 50%,
+        rgba(139, 111, 71, 0.1) 100%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    z-index: 1;
+}
+
+.photo-item:hover::before {
+    opacity: 1;
+}
+
+.photo-item:hover {
+    transform: translateY(-10px) scale(1.03) rotate(1deg);
+    box-shadow: 
+        0 15px 35px var(--shadow-color),
+        0 0 30px rgba(201, 169, 97, 0.3);
+    border-color: var(--vintage-gold);
+    z-index: 10;
+}
+
+.photo-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: sepia(25%) contrast(1.1) brightness(0.95);
+    transition: all 0.4s ease;
+    display: block;
+}
+
+.photo-item:hover img {
+    filter: sepia(0%) contrast(1.2) brightness(1.05);
+    transform: scale(1.1);
+}
+
+/* Photo Overlay on Hover */
+.photo-item::after {
+    content: '👁️';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(0);
+    font-size: 3rem;
+    opacity: 0;
+    transition: all 0.3s ease;
+    z-index: 2;
+    text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+
+.photo-item:hover::after {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.9;
+}
+
+/* Placeholder Card */
+.photo-placeholder-card {
+    grid-column: 1 / -1;
+    text-align: center;
+    padding: 80px 40px;
+    background: var(--vintage-light);
+    border: 3px dashed var(--vintage-brown);
+    border-radius: 12px;
+    color: var(--vintage-brown);
+}
+
+.placeholder-icon {
+    font-size: 5rem;
+    margin-bottom: 20px;
+    animation: bounce 2s infinite;
+}
+
+.placeholder-title {
+    font-size: 2rem;
+    font-family: 'Cinzel', serif;
+    margin-bottom: 15px;
+    color: var(--vintage-dark);
+}
+
+.placeholder-text {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    margin: 10px 0;
+    color: var(--vintage-brown);
+}
+
+.placeholder-text code {
+    background: var(--vintage-cream);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-family: 'Courier New', monospace;
+    color: var(--vintage-dark);
+    border: 1px solid var(--vintage-brown);
+}
+
+/* Lightbox Modal */
+.lightbox {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    z-index: 10000;
+    animation: fadeIn 0.3s ease;
+    backdrop-filter: blur(5px);
+}
+
+.lightbox.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content {
+    position: relative;
+    max-width: 90%;
+    max-height: 90%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lightbox-content img {
+    max-width: 100%;
+    max-height: 90vh;
+    object-fit: contain;
+    border: 4px solid var(--vintage-gold);
+    border-radius: 8px;
+    box-shadow: 0 10px 50px rgba(0, 0, 0, 0.8);
+    animation: zoomIn 0.3s ease;
+}
+
+.lightbox-close {
+    position: absolute;
+    top: -50px;
+    right: 0;
+    color: white;
+    font-size: 3rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.3s ease, color 0.3s ease;
+    width: 50px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    background: rgba(139, 111, 71, 0.8);
+}
+
+.lightbox-close:hover {
+    transform: rotate(90deg) scale(1.2);
+    color: var(--vintage-gold);
+    background: rgba(201, 169, 97, 0.9);
+}
+
+.lightbox-nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    pointer-events: none;
+}
+
+.lightbox-prev,
+.lightbox-next {
+    pointer-events: all;
+    background: rgba(139, 111, 71, 0.8);
+    border: 2px solid var(--vintage-gold);
+    color: white;
+    font-size: 3rem;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 20px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+    background: rgba(201, 169, 97, 0.9);
+    transform: scale(1.1);
+    box-shadow: 0 5px 20px rgba(201, 169, 97, 0.5);
+}
+
+.lightbox-counter {
+    position: absolute;
+    bottom: -50px;
+    left: 50%;
+    transform: translateX(-50%);
+    color: white;
+    font-size: 1.2rem;
+    font-family: 'Playfair Display', serif;
+    background: rgba(139, 111, 71, 0.8);
+    padding: 8px 20px;
+    border-radius: 20px;
+    border: 2px solid var(--vintage-gold);
+}
+
+/* Vintage Button Styles */
+.gallery-button-container {
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.vintage-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+    padding: 18px 45px;
+    background: linear-gradient(135deg, var(--vintage-cream) 0%, var(--vintage-light) 100%);
+    border: 3px solid var(--vintage-brown);
+    border-radius: 50px;
+    color: var(--vintage-dark);
+    text-decoration: none;
+    font-family: 'Playfair Display', serif;
+    font-size: 1.3rem;
+    font-weight: 600;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 
+        0 8px 20px var(--shadow-color),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    position: relative;
+    overflow: hidden;
+}
+
+.vintage-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(201, 169, 97, 0.3) 0%, transparent 70%);
+    transform: translate(-50%, -50%);
+    transition: width 0.6s ease, height 0.6s ease;
+}
+
+.vintage-button:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+.vintage-button:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 
+        0 15px 35px var(--shadow-color),
+        0 0 30px rgba(201, 169, 97, 0.4);
+    border-color: var(--vintage-gold);
+    background: linear-gradient(135deg, var(--vintage-light) 0%, var(--vintage-cream) 100%);
+}
+
+.vintage-button:active {
+    transform: translateY(-2px) scale(1.02);
+}
+
+.button-icon {
+    font-size: 2rem;
+    position: relative;
+    z-index: 1;
+    animation: pulse 2s infinite;
+}
+
+.button-text {
+    position: relative;
+    z-index: 1;
+    letter-spacing: 1px;
+}
+
+.button-decoration {
+    font-size: 1.5rem;
+    color: var(--vintage-gold);
+    position: relative;
+    z-index: 1;
+    animation: rotate 3s linear infinite;
+}
+
+.button-hint {
+    margin-top: 20px;
+    font-style: italic;
+    color: var(--vintage-brown);
+    font-size: 1rem;
+    opacity: 0.8;
+}
+
+/* Animations */
+@keyframes fadeInScale {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes zoomIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+@keyframes rotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Staggered Animation for Photos */
+.photo-item:nth-child(1) { animation-delay: 0.1s; }
+.photo-item:nth-child(2) { animation-delay: 0.2s; }
+.photo-item:nth-child(3) { animation-delay: 0.3s; }
+.photo-item:nth-child(4) { animation-delay: 0.4s; }
+.photo-item:nth-child(5) { animation-delay: 0.5s; }
+.photo-item:nth-child(6) { animation-delay: 0.6s; }
+.photo-item:nth-child(7) { animation-delay: 0.7s; }
+.photo-item:nth-child(8) { animation-delay: 0.8s; }
+.photo-item:nth-child(9) { animation-delay: 0.9s; }
+.photo-item:nth-child(10) { animation-delay: 1s; }
+.photo-item:nth-child(n+11) { animation-delay: 1.1s; }
+
+/* Responsive Design for Photo Gallery */
+@media (max-width: 768px) {
+    .photo-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        gap: 15px;
+    }
+    
+    .vintage-button {
+        padding: 15px 35px;
+        font-size: 1.1rem;
+    }
+    
+    .lightbox-prev,
+    .lightbox-next {
+        width: 50px;
+        height: 50px;
+        font-size: 2rem;
+        margin: 0 10px;
+    }
+    
+    .lightbox-close {
+        top: -40px;
+        font-size: 2.5rem;
+        width: 40px;
+        height: 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .photo-gallery-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+        gap: 12px;
+    }
+    
+    .vintage-button {
+        flex-direction: column;
+        gap: 10px;
+        padding: 15px 30px;
+    }
+    
+    .placeholder-title {
+        font-size: 1.5rem;
+    }
+    
+    .placeholder-text {
+        font-size: 1rem;
+    }
+}
+

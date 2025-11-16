@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photo Gallery - 10 Years of Memories 📸</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="photos.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700;900&family=Dancing+Script:wght@400;700&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Vintage Paper Background -->
+    <div class="paper-texture"></div>
+    
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header Section -->
+        <header class="vintage-header">
+            <div class="ornamental-border-top"></div>
+            <h1 class="main-title">Our Photo Gallery</h1>
+            <p class="subtitle">Memories Through the Years</p>
+            <div class="ornamental-border-bottom"></div>
+        </header>
+
+        <!-- Back Button -->
+        <div class="back-button-container">
+            <a href="index.html" class="back-button">
+                <span>←</span> Back to Home
+            </a>
+        </div>
+
+        <!-- Gallery Info -->
+        <section class="gallery-info-section">
+            <div class="vintage-card">
+                <p class="gallery-intro">
+                    Every photograph tells a story, every moment captured is a treasure. 
+                    Scroll through these memories and relive the beautiful journey we've shared together.
+                </p>
+            </div>
+        </section>
+
+        <!-- Photo Gallery Grid -->
+        <section class="photo-gallery-section">
+            <div class="photo-gallery-grid" id="photoGalleryGrid">
+                <!-- Photos will be dynamically added here -->
+                <div class="photo-placeholder-card">
+                    <div class="placeholder-icon">📷</div>
+                    <p class="placeholder-title">Add Your Photos</p>
+                    <p class="placeholder-text">
+                        To add your photos, open <code>photos.js</code> and add your photo paths to the <code>photoPaths</code> array.
+                    </p>
+                    <p class="placeholder-text">
+                        Place your photos in the <code>photos/</code> folder and reference them like: <code>'photos/photo1.jpg'</code>
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="vintage-footer">
+            <div class="ornamental-border-top"></div>
+            <p class="footer-text">Made with ❤️ and care for a special friend</p>
+            <p class="footer-year">2025</p>
+            <div class="ornamental-border-bottom"></div>
+        </footer>
+    </div>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox-content">
+            <span class="lightbox-close" id="lightboxClose">&times;</span>
+            <img src="" alt="" id="lightboxImage">
+            <div class="lightbox-nav">
+                <button class="lightbox-prev" id="lightboxPrev">‹</button>
+                <button class="lightbox-next" id="lightboxNext">›</button>
+            </div>
+            <div class="lightbox-counter" id="lightboxCounter"></div>
+        </div>
+    </div>
+
+    <!-- Floating Hearts Animation -->
+    <div class="hearts-container"></div>
+
+    <script src="photos.js"></script>
+    <script>
+        // Backup initialization - ensure photos load even if there's a timing issue
+        window.addEventListener('load', function() {
+            console.log('Window load event fired');
+            // Give it a small delay to ensure everything is ready
+            setTimeout(function() {
+                const grid = document.getElementById('photoGalleryGrid');
+                if (grid && grid.children.length === 1 && grid.querySelector('.photo-placeholder-card')) {
+                    console.log('Placeholder still visible, attempting to initialize gallery...');
+                    if (typeof initializePhotoGallery === 'function') {
+                        initializePhotoGallery();
+                    }
+                }
+            }, 500);
+        });
+    </script>
+</body>
+</html>
+
